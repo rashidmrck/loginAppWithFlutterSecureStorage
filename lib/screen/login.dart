@@ -7,13 +7,14 @@ import 'package:provider/provider.dart';
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String username;
-    String password;
     return Scaffold(
       body: WillPopScope(
         onWillPop: () async => false,
         child: Consumer<SaveUser>(
           builder: (context, data, child) {
+            String username = data.username;
+            String password = data.password;
+//            print(data.username);
             return Container(
               padding: EdgeInsets.only(right: 40, left: 40),
               child: Column(
@@ -21,7 +22,8 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   TextFieldBox(
-                    initialValue: data.username != null ? data.username : 'hfd',
+                    initialValue: data.username,
+                    obscureText: false,
                     onChange: (changeText) {
                       username = changeText;
                       print(username);
@@ -32,7 +34,8 @@ class LoginScreen extends StatelessWidget {
                     height: 20,
                   ),
                   TextFieldBox(
-                    initialValue: data.password != null ? data.password : '',
+                    initialValue: data.password,
+                    obscureText: true,
                     labelText: 'Password',
                     onChange: (changeText) {
                       password = changeText;
